@@ -9,7 +9,7 @@ class WidgetTheme {
   static TextStyle appbarTitle =
       const TextStyle(fontFamily: 'OleoScript', fontSize: 27);
 
-  static TextStyle bigTextTitle = const TextStyle(fontSize: 40);
-  static TextStyle mediumTex = TextStyle(fontSize: 30, color: AppTheme.fifth);
-  static TextStyle shortText = TextStyle(fontSize: 20, color: AppTheme.fourth);
+  static TextStyle bigTextTitle = const TextStyle(fontSize: 37);
+  static TextStyle mediumTex = TextStyle(fontSize: 27, color: AppTheme.fifth);
+  static TextStyle shortText = TextStyle(fontSize: 17, color: AppTheme.fourth);
 }

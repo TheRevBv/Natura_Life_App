@@ -67,10 +67,16 @@ class LoginForm extends StatelessWidget {
           ),
           const SizedBox(height: 50),
           ReusableWidgets.filledColorButton(
-              func: () {
-                Navigator.pushNamed(context, '/Home');
+              func: () async {
+                FocusScope.of(context).unfocus();
+                await Future.delayed(const Duration(seconds: 3));
+                if (lfp.user != '' && lfp.password != '') {
+                  lfp.buttonText = 'Cargando';
+                  // ignore: use_build_context_synchronously
+                  Navigator.pushNamed(context, '/Home');
+                }
               },
-              text: 'Iniciar Sesión'),
+              text: lfp.buttonText),
         ],
       ),
     );

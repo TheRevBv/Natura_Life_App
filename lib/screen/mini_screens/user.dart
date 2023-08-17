@@ -35,35 +35,43 @@ class User extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-                Row(
-                  children: [
-                    ReusableWidgets.divider(),
-                    CircleAvatar(
-                      radius: 60,
-                      backgroundColor: AppTheme.fifth,
-                      foregroundColor: Colors.white,
-                      child: const Text(
-                        'A',
-                        style: TextStyle(fontSize: 80),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          ReusableWidgets.divider(),
+                          CircleAvatar(
+                            radius: 60,
+                            backgroundColor: AppTheme.fifth,
+                            foregroundColor: Colors.white,
+                            child: const Text(
+                              'A',
+                              style: TextStyle(fontSize: 80),
+                            ),
+                          ),
+                          ReusableWidgets.divider()
+                        ],
                       ),
-                    ),
-                    ReusableWidgets.divider()
-                  ],
-                ),
-                Text(
-                  'Juanito Peres',
-                  style: WidgetTheme.bigTextTitle,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 50),
-                ReusableWidgets.dividerWithText(heading: 'Datos de Usuario'),
-                const SizedBox(height: 20),
-                ReusableWidgets.userData(
-                    data: 'correo@correo.com', icon: Icons.email),
-                ReusableWidgets.userData(
-                    data: 'Nombre Completo', icon: Icons.person_2),
-                ReusableWidgets.userData(
-                    data: 'Rango', icon: Icons.rocket_launch)
+                      Text(
+                        'Juanito Peres',
+                        style: WidgetTheme.bigTextTitle,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 50),
+                      ReusableWidgets.dividerWithText(
+                          heading: 'Datos de Usuario'),
+                      const SizedBox(height: 20),
+                      ReusableWidgets.userData(
+                          data: 'correo@correo.com', icon: Icons.email),
+                      ReusableWidgets.userData(
+                          data: 'Nombre Completo', icon: Icons.person_2),
+                      ReusableWidgets.userData(
+                          data: 'Rango', icon: Icons.rocket_launch)
+                    ],
+                  ),
+                )
               ],
             ),
           ),

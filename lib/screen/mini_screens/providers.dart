@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:natura_life/theme/apptheme.dart';
 import 'package:natura_life/widget/reusable_widgets.dart';
 
 class Providers extends StatelessWidget {
@@ -8,23 +9,31 @@ class Providers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ReusableWidgets.generalAppBar(title: 'Proveedores'),
-      body: GridView.builder(
-        itemCount: 10,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 1.5,
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: ListView.builder(
+          itemCount: 20,
+          itemBuilder: (context, index) {
+            return Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  leading: CircleAvatar(
+                    child: Text('A'),
+                    backgroundColor: AppTheme.fifth,
+                    foregroundColor: AppTheme.white,
+                  ),
+                  title: Text('Titulo del proveedor'),
+                  trailing: Icon(
+                    Icons.chevron_right,
+                    color: AppTheme.primary,
+                    size: 30,
+                  ),
+                ),
+              ),
+            );
+          },
         ),
-        itemBuilder: (context, index) {
-          return Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            clipBehavior: Clip.antiAlias,
-            child: Image.asset(
-              'assets/images/fondo_1.png',
-              fit: BoxFit.cover,
-            ),
-          );
-        },
       ),
     );
   }

@@ -65,10 +65,18 @@ class ReusableWidgets {
         padding: const EdgeInsets.all(15.0),
         backgroundColor: AppTheme.primary,
       ),
-      child: Text(
-        text,
-        style: const TextStyle(
-            fontSize: 18.0), // Aumenta el tamaño de la fuente de letra
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Text(
+              text,
+              style: const TextStyle(
+                  fontSize: 18.0), // Aumenta el tamaño de la fuente de letra
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -112,9 +120,10 @@ class ReusableWidgets {
     );
   }
 
-  static AppBar generalAppBar({required String title}) {
+  static AppBar generalAppBar(
+      {required String title, bool hasLeading = false}) {
     return AppBar(
-      automaticallyImplyLeading: false,
+      automaticallyImplyLeading: hasLeading,
       centerTitle: true,
       title: Text(
         title,

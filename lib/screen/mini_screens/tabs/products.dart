@@ -9,23 +9,28 @@ class ProductTabs {
       child: ListView.builder(
         itemCount: 20,
         itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              leading: FadeInImage(
-                placeholder:
-                    const AssetImage('assets/images/logo_natural_life.png'),
-                image: NetworkImage(
-                    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png'),
-              ),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text('Titulo #$index'), const Text('\$0.00')],
-              ),
-              subtitle: const Text('Subtitulo del producto'),
-              trailing: CircleAvatar(
-                backgroundColor: AppTheme.fourth,
-                foregroundColor: Colors.white,
-                child: const Text('150'),
+          return GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/Product', arguments: index);
+            },
+            child: Card(
+              child: ListTile(
+                leading: FadeInImage(
+                  placeholder:
+                      const AssetImage('assets/images/logo_natural_life.png'),
+                  image: NetworkImage(
+                      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png'),
+                ),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [Text('Titulo #$index'), const Text('\$0.00')],
+                ),
+                subtitle: const Text('Subtitulo del producto'),
+                trailing: CircleAvatar(
+                  backgroundColor: AppTheme.fourth,
+                  foregroundColor: Colors.white,
+                  child: const Text('150'),
+                ),
               ),
             ),
           );
