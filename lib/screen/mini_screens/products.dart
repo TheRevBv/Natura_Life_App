@@ -41,7 +41,7 @@ class _ProductsState extends State<Products> {
         body: TabBarView(
           physics: const BouncingScrollPhysics(),
           children: [
-            ProductTabs.productTab(),
+            ProductTabs.productTab(prodList: prodProvider.products),
             ProductTabs.materialTab(matList: prodProvider.matter),
           ],
         ),

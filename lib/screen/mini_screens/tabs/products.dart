@@ -3,40 +3,51 @@ import 'package:natura_life/theme/apptheme.dart';
 import 'package:natura_life/theme/widget_styles.dart';
 
 class ProductTabs {
-  static Padding productTab() {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: ListView.builder(
-        itemCount: 20,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, '/Product', arguments: index);
-            },
-            child: Card(
-              child: ListTile(
-                leading: FadeInImage(
-                  placeholder:
-                      const AssetImage('assets/images/logo_natural_life.png'),
-                  image: NetworkImage(
-                      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png'),
-                ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('Titulo #$index'), const Text('\$0.00')],
-                ),
-                subtitle: const Text('Subtitulo del producto'),
-                trailing: CircleAvatar(
-                  backgroundColor: AppTheme.fourth,
-                  foregroundColor: Colors.white,
-                  child: const Text('150'),
-                ),
-              ),
+  static Widget productTab({required List prodList}) {
+    return prodList.isEmpty
+        ? Center(
+            child: Text(
+              'Oh, parece que los productos... han desaparecido',
+              style: WidgetTheme.appbarTitle,
+            ),
+          )
+        : Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListView.builder(
+              itemCount: prodList.length,
+              itemBuilder: (context, index) {
+                var producto = prodList[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/Product',
+                        arguments: prodList[index]);
+                  },
+                  child: Card(
+                    child: ListTile(
+                      leading: FadeInImage(
+                        placeholder: const AssetImage(
+                            'assets/images/logo_natural_life.png'),
+                        image: NetworkImage(producto['imagen']),
+                      ),
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(producto['nombre']),
+                          Text('\$${producto['costo_venta']}')
+                        ],
+                      ),
+                      subtitle: Text(producto['descripcion']),
+                      trailing: CircleAvatar(
+                        backgroundColor: AppTheme.fourth,
+                        foregroundColor: Colors.white,
+                        child: Text(producto['existencias']),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           );
-        },
-      ),
-    );
   }
 
 //------------------------------------------------------------------------------
@@ -52,7 +63,7 @@ class ProductTabs {
         : Padding(
             padding: const EdgeInsets.all(10.0),
             child: ListView.builder(
-              itemCount: 20,
+              itemCount: matList.length,
               itemBuilder: (context, index) {
                 var item = matList[index];
                 return Card(
