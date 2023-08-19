@@ -51,9 +51,10 @@ class _ProvidersState extends State<Providers> {
                           leading: CircleAvatar(
                             backgroundColor: AppTheme.fifth,
                             foregroundColor: AppTheme.white,
-                            child: Text(provider['nombre'].substring(0, 1)),
+                            child: Text(
+                                provider['nombreProveedor'].substring(0, 1)),
                           ),
-                          title: Text(provider['nombre']),
+                          title: Text(provider['nombreProveedor']),
                           trailing: Icon(
                             Icons.chevron_right,
                             color: AppTheme.primary,

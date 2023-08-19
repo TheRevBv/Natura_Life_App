@@ -73,14 +73,15 @@ class _HomeState extends State<Home> {
                     });
                   }),
               const SizedBox(),
-              ReusableWidgets.bottomButton(
-                  icon: Icons.delivery_dining,
-                  action: () {
-                    dbp.setMiddleIcon(Icons.delivery_dining);
-                    setState(() {
-                      index = 3;
-                    });
-                  }),
+              const SizedBox(),
+              // ReusableWidgets.bottomButton(
+              //     icon: Icons.delivery_dining,
+              //     action: () {
+              //       dbp.setMiddleIcon(Icons.delivery_dining);
+              //       setState(() {
+              //         index = 3;
+              //       });
+              //     }),
               ReusableWidgets.bottomButton(
                   icon: Icons.person,
                   action: () {

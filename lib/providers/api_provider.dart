@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:natura_life/providers/login_provider.dart';
 import 'package:natura_life/providers/util_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class APiProvider extends ChangeNotifier {
-  final String _urlBase = 'https://10.16.12.175:7032/api/';
+  final String _urlBase = 'http://192.168.147.53:7032/api/';
 
   List<dynamic> products = [];
   List<dynamic> matter = [];
@@ -12,6 +14,26 @@ class APiProvider extends ChangeNotifier {
 
   APiProvider() {
     getMatter();
+  }
+
+  Future login({required LoginFormProvider lfp}) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String url = '${_urlBase}Login';
+    final response = await UtilProvider.rtp.bodyHTTP(urlBase: url, lfp: lfp);
+    if (response.statusCode == 200) {
+      var jResponse = jsonDecode(response.body) as Map;
+      prefs.setString('IdUsuario', '${jResponse['id']}');
+      prefs.setString('CorreoUsuario', jResponse['correo']);
+      prefs.setString('RolUsuario', jResponse['nombreRol']);
+      prefs.setString('NombreUsuario', jResponse['nombre']);
+      prefs.setString('ApellidosUsuario', jResponse['apellidos']);
+      prefs.setString('TelefonoUsuario', jResponse['telefono']);
+      prefs.setString('DireccionUsuario', jResponse['direccion']);
+      prefs.setString('Token', jResponse['token']);
+      return 'OK';
+    }
+    notifyListeners();
+    return response.body;
   }
 
   Future getProducts() async {
@@ -35,12 +57,22 @@ class APiProvider extends ChangeNotifier {
   }
 
   Future getProviders() async {
-    final String url = '${_urlBase}Proveedor/1';
+    final String url = '${_urlBase}Proveedor/';
     final response = await UtilProvider.rtp.responseHTTP(urlBase: url);
     if (response.statusCode == 200) {
       var jResponse = jsonDecode(response.body) as List<dynamic>;
       provider = jResponse;
       notifyListeners();
+    }
+  }
+
+  Future deleteProduct(int id) async {
+    final String url = '${_urlBase}Producto/$id';
+    final response = await UtilProvider.rtp.deleteHTTP(id: id, urlBase: url);
+    if (response.statusCode == 200) {
+      return 'OK';
+    } else {
+      return 'ERROR';
     }
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:natura_life/theme/apptheme.dart';
 import 'package:natura_life/theme/widget_styles.dart';
@@ -17,6 +19,8 @@ class ProductTabs {
               itemCount: prodList.length,
               itemBuilder: (context, index) {
                 var producto = prodList[index];
+                var image = const Base64Decoder()
+                    .convert(producto['imagen'].substring(22));
                 return GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, '/Product',
@@ -24,23 +28,18 @@ class ProductTabs {
                   },
                   child: Card(
                     child: ListTile(
-                      leading: FadeInImage(
-                        placeholder: const AssetImage(
-                            'assets/images/logo_natural_life.png'),
-                        image: NetworkImage(producto['imagen']),
-                      ),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      leading: Image.memory(image),
+                      title: Text(producto['nombreProducto']),
+                      subtitle: Column(
                         children: [
-                          Text(producto['nombre']),
-                          Text('\$${producto['costo_venta']}')
+                          Text(producto['descripcion']),
+                          Text('\$${producto['costo']}')
                         ],
                       ),
-                      subtitle: Text(producto['descripcion']),
                       trailing: CircleAvatar(
                         backgroundColor: AppTheme.fourth,
                         foregroundColor: Colors.white,
-                        child: Text(producto['existencias']),
+                        child: Text('${producto['cantidad']}'),
                       ),
                     ),
                   ),

@@ -81,28 +81,27 @@ class ReusableWidgets {
     );
   }
 
-  static ElevatedButton borderColorButton({
-    required VoidCallback func,
-    required String text,
-  }) {
+  static ElevatedButton borderColorButton(
+      {required VoidCallback func,
+      required String text,
+      required Color textColor,
+      required Color bgColor}) {
     return ElevatedButton(
       onPressed: func,
       style: ElevatedButton.styleFrom(
         shadowColor: Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
-          side: BorderSide(
-              color: AppTheme.primary), // Establece el color del contorno
+          side: BorderSide(color: textColor), // Establece el color del contorno
         ),
         padding: const EdgeInsets.all(20.0),
-        backgroundColor: Colors.white, // Establece el color de fondo a blanco
+        backgroundColor: bgColor, // Establece el color de fondo a blanco
       ),
       child: Text(
         text,
         style: TextStyle(
           fontSize: 18.0, // Aumenta el tamaño de la fuente de letra
-          color: AppTheme
-              .primary, // Establece el color del texto al color primario
+          color: textColor, // Establece el color del texto al color primario
         ),
       ),
     );

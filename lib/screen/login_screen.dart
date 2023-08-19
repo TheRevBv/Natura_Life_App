@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:natura_life/providers/api_provider.dart';
 import 'package:natura_life/providers/login_provider.dart';
 import 'package:natura_life/theme/widget_styles.dart';
 import 'package:natura_life/widget/reusable_widgets.dart';
@@ -44,6 +45,7 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final lfp = Provider.of<LoginFormProvider>(context);
+    final ap = Provider.of<APiProvider>(context);
     return Form(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -69,11 +71,23 @@ class LoginForm extends StatelessWidget {
           ReusableWidgets.filledColorButton(
               func: () async {
                 FocusScope.of(context).unfocus();
-                await Future.delayed(const Duration(seconds: 3));
                 if (lfp.user != '' && lfp.password != '') {
                   lfp.buttonText = 'Cargando';
-                  // ignore: use_build_context_synchronously
-                  Navigator.pushNamed(context, '/Home');
+                  // ignore: unrelated_type_equality_checks
+                  if (await ap.login(lfp: lfp) == 'OK') {
+                    // ignore: use_build_context_synchronously
+                    Navigator.pop(context);
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushNamed(context, '/Home');
+                  } else {
+                    lfp.buttonText = 'Datos incorrectos';
+                    await Future.delayed(const Duration(seconds: 3));
+                    lfp.buttonText = 'Iniciar Sesión';
+                  }
+                } else {
+                  lfp.buttonText = 'Ni siquiera hay texto';
+                  await Future.delayed(const Duration(seconds: 3));
+                  lfp.buttonText = 'Iniciar Sesión';
                 }
               },
               text: lfp.buttonText),
