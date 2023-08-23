@@ -98,12 +98,12 @@ class _UserState extends State<User> {
                                 ReusableWidgets.userData(
                                     data: userData['rol'],
                                     icon: Icons.rocket_launch),
-                                ReusableWidgets.userData(
-                                    data: userData['direccion'],
-                                    icon: Icons.map_rounded),
-                                ReusableWidgets.userData(
-                                    data: userData['telefono'],
-                                    icon: Icons.phone_android_rounded),
+                                // ReusableWidgets.userData(
+                                //     data: userData['direccion'],
+                                //     icon: Icons.map_rounded),
+                                // ReusableWidgets.userData(
+                                //     data: userData['telefono'],
+                                //     icon: Icons.phone_android_rounded),
                                 const SizedBox(height: 20),
                                 ReusableWidgets.filledColorButton(
                                     func: () {

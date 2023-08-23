@@ -25,48 +25,53 @@ class _ProvidersState extends State<Providers> {
     List providers = prodProvider.provider;
 
     return Scaffold(
-      appBar: ReusableWidgets.generalAppBar(title: 'Proveedores'),
-      body: providers.isEmpty
-          ? Center(
-              child: Text(
-                'Los proveedores se han ido de sabatico... pronto vuelven',
-                style: WidgetTheme.appbarTitle,
+        appBar: ReusableWidgets.generalAppBar(title: 'Proveedores'),
+        body: providers.isEmpty
+            ? Center(
+                child: Text(
+                  'Los proveedores se han ido de sabatico... pronto vuelven',
+                  style: WidgetTheme.appbarTitle,
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ListView.builder(
+                  itemCount: providers.length,
+                  itemBuilder: (context, index) {
+                    var provider = providers[index];
+                    // return GestureDetector(
+                    //   onTap: () {
+                    //     Navigator.pushNamed(context, '/Provider',
+                    //         arguments: provider);
+                    //   },
+                    //   child: Card(
+                    //     child: Padding(
+                    //       padding: const EdgeInsets.all(8.0),
+                    //       child: ListTile(
+                    //         leading: CircleAvatar(
+                    //           backgroundColor: AppTheme.fifth,
+                    //           foregroundColor: AppTheme.white,
+                    //           child:
+                    //               Text(provider['razonSocial'].substring(0, 1)),
+                    //         ),
+                    //         title: Text(provider['razonSocial']),
+                    //         trailing: Icon(
+                    //           Icons.chevron_right,
+                    //           color: AppTheme.primary,
+                    //           size: 30,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // );
+                  },
+                ),
               ),
-            )
-          : Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ListView.builder(
-                itemCount: providers.length,
-                itemBuilder: (context, index) {
-                  var provider = providers[index];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/Provider',
-                          arguments: provider);
-                    },
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: AppTheme.fifth,
-                            foregroundColor: AppTheme.white,
-                            child: Text(
-                                provider['nombreProveedor'].substring(0, 1)),
-                          ),
-                          title: Text(provider['nombreProveedor']),
-                          trailing: Icon(
-                            Icons.chevron_right,
-                            color: AppTheme.primary,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-    );
+        floatingActionButton: ReusableWidgets.floatingActionButton(
+          action: () {
+            Navigator.pushNamed(context, '/AddEditProvider');
+          },
+          icon: Icons.add,
+        ));
   }
 }

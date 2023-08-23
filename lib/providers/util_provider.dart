@@ -14,6 +14,7 @@ class UtilProvider extends ChangeNotifier {
     var response = await http.get(Uri.parse(urlBase), headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
+      'Allow-Control-Allow-Origin': '*',
       'Authorization': 'Bearer ${prefs.getString('token')}'
     });
     return response;
@@ -26,7 +27,7 @@ class UtilProvider extends ChangeNotifier {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: jsonEncode({'correo': lfp.user, 'contrasenia': lfp.password}));
+        body: jsonEncode({'correo': lfp.user, 'password': lfp.password}));
 
     return response;
   }

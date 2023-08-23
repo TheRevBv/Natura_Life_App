@@ -23,7 +23,7 @@ class ProviderScreen extends StatelessWidget {
                   foregroundColor: AppTheme.white,
                   radius: 50,
                   child: Text(
-                    provider['nombreProveedor'].substring(0, 1),
+                    provider['razonSocial'].substring(0, 1),
                     style: const TextStyle(fontSize: 50),
                   ),
                 ),
@@ -33,7 +33,7 @@ class ProviderScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        provider['nombreProveedor'],
+                        provider['razonSocial'],
                         style: WidgetTheme.mediumTex,
                       ),
                     ],
@@ -51,9 +51,9 @@ class ProviderScreen extends StatelessWidget {
               content: Column(
                 children: [
                   ReusableWidgets.userData(
-                      data: provider['nombreProveedor'], icon: Icons.person_2),
+                      data: provider['razonSocial'], icon: Icons.person_2),
                   ReusableWidgets.userData(
-                      data: provider['materiaSurte'], icon: Icons.store),
+                      data: provider['correo'], icon: Icons.email),
                   ReusableWidgets.userData(
                       data: provider['telefono'],
                       icon: Icons.phone_android_rounded),

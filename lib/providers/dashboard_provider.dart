@@ -24,8 +24,8 @@ class DashboardProvider extends ChangeNotifier {
       'rol': prefs.getString('RolUsuario'),
       'nombre': prefs.getString('NombreUsuario'),
       'apellidos': prefs.getString('ApellidosUsuario'),
-      'telefono': prefs.getString('TelefonoUsuario'),
-      'direccion': prefs.getString('DireccionUsuario'),
+      // 'telefono': prefs.getString('TelefonoUsuario'),
+      // 'direccion': prefs.getString('DireccionUsuario'),
       'token': prefs.getString('Token'),
     };
     userData = data;

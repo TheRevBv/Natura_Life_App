@@ -20,7 +20,7 @@ class ProductTabs {
               itemBuilder: (context, index) {
                 var producto = prodList[index];
                 var image = const Base64Decoder()
-                    .convert(producto['imagen'].substring(22));
+                    .convert(producto['foto'].substring(23));
                 return GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, '/Product',
@@ -29,17 +29,17 @@ class ProductTabs {
                   child: Card(
                     child: ListTile(
                       leading: Image.memory(image),
-                      title: Text(producto['nombreProducto']),
+                      title: Text(producto['nombre']),
                       subtitle: Column(
                         children: [
                           Text(producto['descripcion']),
-                          Text('\$${producto['costo']}')
+                          Text('\$${producto['precio']}')
                         ],
                       ),
                       trailing: CircleAvatar(
                         backgroundColor: AppTheme.fourth,
                         foregroundColor: Colors.white,
-                        child: Text('${producto['cantidad']}'),
+                        child: Text('${producto['precio']}'),
                       ),
                     ),
                   ),

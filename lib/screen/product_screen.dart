@@ -17,8 +17,7 @@ class ProductScreen extends StatelessWidget {
     final ap = Provider.of<APiProvider>(context);
     final dbp = Provider.of<DashboardProvider>(context);
     final Map producto = ModalRoute.of(context)!.settings.arguments as Map;
-    var imagen =
-        const Base64Decoder().convert(producto['imagen'].substring(22));
+    var imagen = const Base64Decoder().convert(producto['foto'].substring(23));
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -46,7 +45,7 @@ class ProductScreen extends StatelessWidget {
                     content: Column(
                       children: [
                         Text(
-                          producto['nombreProducto'],
+                          producto['nombre'],
                           style: TextStyle(
                               fontFamily: 'OleoScript',
                               fontSize: 27,
@@ -58,10 +57,10 @@ class ProductScreen extends StatelessWidget {
                         Text(producto['descripcion']),
                         const SizedBox(height: 20),
                         ReusableWidgets.userData(
-                            data: 'Existencias: ${producto['cantidad']}',
+                            data: 'Merma: ${producto['merma']}%',
                             icon: Icons.numbers),
                         ReusableWidgets.userData(
-                            data: 'Precio público: \$${producto['costo']}',
+                            data: 'Precio público: \$${producto['precio']}',
                             icon: Icons.price_change),
                         const SizedBox(height: 30),
                         ReusableWidgets.filledColorButton(
@@ -71,7 +70,7 @@ class ProductScreen extends StatelessWidget {
                                       title: Text('¿Estás seguro?',
                                           style: WidgetTheme.appbarTitle),
                                       content: Text(
-                                          'Eliminar ${producto['nombreProducto']} lo borrará para siempre (mucho tiempo)'),
+                                          'Eliminar ${producto['nombre']} lo borrará para siempre (mucho tiempo)'),
                                       actions: <Widget>[
                                         ReusableWidgets.borderColorButton(
                                             func: () async {

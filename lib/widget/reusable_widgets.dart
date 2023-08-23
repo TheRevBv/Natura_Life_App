@@ -171,4 +171,44 @@ class ReusableWidgets {
       ),
     );
   }
+
+  static FloatingActionButton floatingActionButton(
+      {required VoidCallback action, required IconData icon}) {
+    return FloatingActionButton(
+      onPressed: action,
+      backgroundColor: AppTheme.primary,
+      child: Icon(
+        icon,
+        color: AppTheme.white,
+      ),
+    );
+  }
+
+  static TextFormField formInput(
+      {required IconData icon, required String label, bool obscure = false}) {
+    return TextFormField(
+      autocorrect: false,
+      keyboardType: TextInputType.text,
+      obscureText: obscure,
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: AppTheme.primary),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: AppTheme.primary),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: AppTheme.fifth),
+        ),
+        prefixIcon: Icon(
+          icon,
+          color: AppTheme.fourth,
+        ),
+      ),
+      validator: (value) {
+        return (value != null && value.length >= 3) ? null : 'No valido';
+      },
+    );
+  }
 }
