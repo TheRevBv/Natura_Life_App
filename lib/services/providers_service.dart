@@ -57,14 +57,15 @@ class ProviderService extends ChangeNotifier {
   }
 
   Future<Provider> createProvider(Provider provider) async {
+    // print(provider.toJson());
     final url = '$_url/proveedores/prov';
     final resp = await http.post(Uri.parse(url),
         headers: _headers, body: provider.toJson());
     final Map<String, dynamic> decodedData = json.decode(resp.body);
-    // final temp = Provider.fromMap(decodedData);
-    providers.add(provider);
+    final temp = Provider.fromMap(decodedData);
+    providers.add(temp);
     notifyListeners();
-    return provider;
+    return temp;
   }
 
   Future<Provider> updateProvider(Provider provider) async {
@@ -83,7 +84,9 @@ class ProviderService extends ChangeNotifier {
   Future<int> deleteProvider(int id) async {
     final url = '$_url/proveedores/$id';
     final resp = await http.delete(Uri.parse(url), headers: _headers);
+    final index = providers.indexWhere((element) => element.idProveedor == id);
+    providers.removeAt(index);
     notifyListeners();
-    return json.decode(resp.body);
+    return resp.statusCode;
   }
 }
