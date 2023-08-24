@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:natura_life/models/proveedor.dart';
 import 'package:natura_life/theme/apptheme.dart';
 import 'package:natura_life/theme/widget_styles.dart';
 import 'package:natura_life/widget/reusable_widgets.dart';
@@ -8,13 +9,15 @@ class ProviderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map provider = ModalRoute.of(context)!.settings.arguments as Map;
+    final provider = ModalRoute.of(context)!.settings.arguments as Provider;
+
     return Scaffold(
       appBar:
           ReusableWidgets.generalAppBar(title: 'Proveedor', hasLeading: true),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -23,7 +26,7 @@ class ProviderScreen extends StatelessWidget {
                   foregroundColor: AppTheme.white,
                   radius: 50,
                   child: Text(
-                    provider['razonSocial'].substring(0, 1),
+                    provider.razonSocial[0].toUpperCase(),
                     style: const TextStyle(fontSize: 50),
                   ),
                 ),
@@ -33,7 +36,7 @@ class ProviderScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        provider['razonSocial'],
+                        provider.razonSocial,
                         style: WidgetTheme.mediumTex,
                       ),
                     ],
@@ -47,19 +50,20 @@ class ProviderScreen extends StatelessWidget {
                 color: Colors.red,
               ),
             ),
-            ReusableWidgets.cardContainer(
-              content: Column(
-                children: [
-                  ReusableWidgets.userData(
-                      data: provider['razonSocial'], icon: Icons.person_2),
-                  ReusableWidgets.userData(
-                      data: provider['correo'], icon: Icons.email),
-                  ReusableWidgets.userData(
-                      data: provider['telefono'],
-                      icon: Icons.phone_android_rounded),
-                ],
+            Expanded(
+              child: ReusableWidgets.cardContainer(
+                content: Column(
+                  children: [
+                    ReusableWidgets.userData(
+                        data: provider.nombre, icon: Icons.person),
+                    ReusableWidgets.userData(
+                        data: provider.correo, icon: Icons.email),
+                    ReusableWidgets.userData(
+                        data: provider.telefono, icon: Icons.phone),
+                  ],
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

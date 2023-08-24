@@ -6,7 +6,7 @@ import 'package:natura_life/providers/util_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class APiProvider extends ChangeNotifier {
-  final String _urlBase = 'http://192.168.100.158:7092/api';
+  final String _urlBase = 'http://192.168.113.138:7092/api';
 
   List<dynamic> products = [];
   List<dynamic> matter = [];
@@ -62,15 +62,15 @@ class APiProvider extends ChangeNotifier {
     }
   }
 
-  Future getProviders() async {
-    final String url = '$_urlBase/Proveedores';
-    final response = await UtilProvider.rtp.responseHTTP(urlBase: url);
-    if (response.statusCode == 200) {
-      var jResponse = jsonDecode(response.body) as List<dynamic>;
-      provider = jResponse;
-      notifyListeners();
-    }
-  }
+  // Future getProviders() async {
+  //   final String url = '$_urlBase/Proveedores';
+  //   final response = await UtilProvider.rtp.responseHTTP(urlBase: url);
+  //   if (response.statusCode == 200) {
+  //     var jResponse = jsonDecode(response.body) as List<dynamic>;
+  //     provider = jResponse;
+  //     notifyListeners();
+  //   }
+  // }
 
   Future deleteProduct(int id) async {
     final String url = '$_urlBase/Productos/$id';

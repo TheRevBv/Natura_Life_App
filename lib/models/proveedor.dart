@@ -1,4 +1,6 @@
-class Proveedor {
+import 'dart:convert';
+
+class Provider {
   final int idProveedor;
   final int idUsuario;
   final int idStatus;
@@ -13,7 +15,7 @@ class Proveedor {
   final String fechaNacimiento;
   final String foto;
 
-  Proveedor(
+  Provider(
       {required this.idProveedor,
       required this.idUsuario,
       required this.idStatus,
@@ -28,24 +30,26 @@ class Proveedor {
       required this.fechaNacimiento,
       required this.foto});
 
-  factory Proveedor.fromJson(Map<String, dynamic> json) {
-    return Proveedor(
-        idProveedor: json['idProveedor'],
-        idUsuario: json['idUsuario'],
-        idStatus: json['idStatus'],
-        direccion: json['direccion'],
-        telefono: json['telefono'],
-        rfc: json['rfc'],
-        razonSocial: json['razonSocial'],
-        nombre: json['nombre'],
-        apellido: json['apellido'],
-        correo: json['correo'],
-        password: json['password'],
-        fechaNacimiento: json['fechaNacimiento'],
-        foto: json['foto']);
-  }
+  factory Provider.fromJson(String str) => Provider.fromMap(json.decode(str));
 
-  Map<String, dynamic> toJson() => {
+  String toJson() => json.encode(toMap());
+
+  factory Provider.fromMap(Map<String, dynamic> json) => Provider(
+      idProveedor: json['idProveedor'],
+      idUsuario: json['idUsuario'],
+      idStatus: json['idStatus'],
+      direccion: json['direccion'],
+      telefono: json['telefono'],
+      rfc: json['rfc'],
+      razonSocial: json['razonSocial'],
+      nombre: json['nombre'],
+      apellido: json['apellido'],
+      correo: json['correo'],
+      password: json['password'],
+      fechaNacimiento: json['fechaNacimiento'],
+      foto: json['foto']);
+
+  Map<String, dynamic> toMap() => {
         'idProveedor': idProveedor,
         'idUsuario': idUsuario,
         'idStatus': idStatus,
