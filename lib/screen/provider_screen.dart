@@ -13,7 +13,8 @@ class ProviderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final providerSvc = Provider.of<ProviderService>(context);
-    final title = providerSvc.selectedProvider.idProveedor == null
+    final title = providerSvc.selectedProvider.idProveedor == null ||
+            providerSvc.selectedProvider.idProveedor == 0
         ? 'Nuevo Proveedor'
         : 'Editar Proveedor ${providerSvc.selectedProvider.idProveedor}';
     final screenWidth = MediaQuery.of(context).size.width;
@@ -166,21 +167,21 @@ class FormProvider extends StatelessWidget {
             onchange: (value) => proveedor.direccion = value,
           ),
           const SizedBox(height: 20),
-          ReusableWidgets.formInput(
+          ReusableWidgets.formInputPhone(
             icon: Icons.person,
             label: 'Telefono',
             initialVal: proveedor.telefono,
             onchange: (value) => proveedor.telefono = value,
           ),
           const SizedBox(height: 20),
-          ReusableWidgets.formInput(
+          ReusableWidgets.formInputEmail(
             icon: Icons.person,
             label: 'Email',
             initialVal: proveedor.correo,
             onchange: (value) => proveedor.correo = value,
           ),
           const SizedBox(height: 20),
-          ReusableWidgets.formInput(
+          ReusableWidgets.formInputPassword(
             icon: Icons.person,
             label: 'Password',
             onchange: (value) => proveedor.password = value,

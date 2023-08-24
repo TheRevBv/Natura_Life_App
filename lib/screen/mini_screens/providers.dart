@@ -20,6 +20,13 @@ class _ProvidersState extends State<Providers> {
     super.initState();
   }
 
+  void _deleteProvider(int index, ProviderService providerService) {
+    setState(() {
+      providerService
+          .deleteProvider(providerService.providers[index].idProveedor!);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // final prodProvider = Provider.of<APiProvider>(context);
@@ -39,23 +46,34 @@ class _ProvidersState extends State<Providers> {
               child: ListView.builder(
                 itemCount: providerService.providers.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      providerService.selectedProvider =
-                          providerService.providers[index].copy();
-                      // print(providerService.selectedProvider);
-                      Navigator.pushNamed(context, '/Provider');
+                  return Dismissible(
+                    key: UniqueKey(),
+                    direction: DismissDirection.endToStart,
+                    background: Container(
+                      color: Colors.red,
+                      alignment: Alignment.centerRight,
+                      padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Icon(Icons.delete, color: Colors.white),
+                    ),
+                    onDismissed: (direction) {
+                      _deleteProvider(index, providerService);
                     },
-                    child: CardProvider(
-                        provider: providerService.providers[index]),
+                    child: GestureDetector(
+                      onTap: () {
+                        providerService.selectedProvider =
+                            providerService.providers[index];
+                        Navigator.pushNamed(context, '/Provider');
+                      },
+                      child: CardProvider(
+                          provider: providerService.providers[index]),
+                    ),
                   );
                 },
-              ),
-            ),
+              )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           providerService.selectedProvider = providerModel.Provider(
-              idProveedor: null,
+              idProveedor: int.parse('0'),
               razonSocial: '',
               rfc: '',
               direccion: '',
@@ -63,7 +81,7 @@ class _ProvidersState extends State<Providers> {
               password: '',
               apellido: '',
               nombre: '',
-              fechaNacimiento: '',
+              fechaNacimiento: '2000-01-01',
               telefono: '',
               idStatus: int.parse('1'),
               foto: ' ',

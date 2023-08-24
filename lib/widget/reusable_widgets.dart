@@ -188,7 +188,7 @@ class ReusableWidgets {
       {required IconData icon,
       required String label,
       bool obscure = false,
-      required void onchange(String)?,
+      required void Function(String)? onchange,
       String initialVal = ''}) {
     return TextFormField(
       initialValue: initialVal,
@@ -223,7 +223,7 @@ class ReusableWidgets {
       {required IconData icon,
       required String label,
       bool obscure = false,
-      required void onchange(String)?,
+      required void Function(String)? onchange,
       initialVal = ''}) {
     return TextFormField(
       initialValue: initialVal,
@@ -246,6 +246,112 @@ class ReusableWidgets {
           color: AppTheme.fourth,
         ),
       ),
+      onChanged: (value) => onchange!(value),
+      validator: (value) {
+        return (value != null && value.length >= 3) ? null : 'No valido';
+      },
+    );
+  }
+
+  static TextFormField formInputPhone({
+    required IconData icon,
+    required String label,
+    bool obscure = false,
+    required void Function(String)? onchange,
+    String initialVal = '',
+  }) {
+    return TextFormField(
+      initialValue: initialVal,
+      autocorrect: false,
+      keyboardType: TextInputType.phone,
+      obscureText: obscure,
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: AppTheme.primary),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: AppTheme.primary),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: AppTheme.fifth),
+        ),
+        prefixIcon: Icon(
+          icon,
+          color: AppTheme.fourth,
+        ),
+      ),
+      onChanged: (value) => onchange!(value),
+      validator: (value) {
+        return (value != null && value.length <= 10) ? null : 'No valido';
+      },
+    );
+  }
+
+  static TextFormField formInputEmail({
+    required IconData icon,
+    required String label,
+    bool obscure = false,
+    required void Function(String)? onchange,
+    String initialVal = '',
+  }) {
+    return TextFormField(
+      initialValue: initialVal,
+      autocorrect: false,
+      keyboardType: TextInputType.emailAddress,
+      obscureText: obscure,
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: AppTheme.primary),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: AppTheme.primary),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: AppTheme.fifth),
+        ),
+        prefixIcon: Icon(
+          icon,
+          color: AppTheme.fourth,
+        ),
+      ),
+      onChanged: (value) => onchange!(value),
+      validator: (value) {
+        return (value != null && value.length >= 3) ? null : 'No valido';
+      },
+    );
+  }
+
+  static TextFormField formInputPassword({
+    required IconData icon,
+    required String label,
+    bool obscure = false,
+    required void Function(String)? onchange,
+    String initialVal = '',
+  }) {
+    return TextFormField(
+      initialValue: initialVal,
+      autocorrect: false,
+      keyboardType: TextInputType.visiblePassword,
+      obscureText: obscure,
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: AppTheme.primary),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: AppTheme.primary),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: AppTheme.fifth),
+        ),
+        prefixIcon: Icon(
+          icon,
+          color: AppTheme.fourth,
+        ),
+      ),
+      onChanged: (value) => onchange!(value),
       validator: (value) {
         return (value != null && value.length >= 3) ? null : 'No valido';
       },
