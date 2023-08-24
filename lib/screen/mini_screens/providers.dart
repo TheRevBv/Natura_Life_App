@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:natura_life/models/proveedor.dart' as providerModel;
 // import 'package:natura_life/providers/api_provider.dart';
-import 'package:natura_life/services/providers_service.dart';
+import 'package:natura_life/services/services.dart';
 import 'package:natura_life/theme/apptheme.dart';
 import 'package:natura_life/theme/widget_styles.dart';
 import 'package:natura_life/widget/reusable_widgets.dart';
@@ -38,39 +39,71 @@ class _ProvidersState extends State<Providers> {
               child: ListView.builder(
                 itemCount: providerService.providers.length,
                 itemBuilder: (context, index) {
-                  var provider = providerService.providers[index];
                   return GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/Provider',
-                          arguments: provider);
+                      providerService.selectedProvider =
+                          providerService.providers[index].copy();
+                      // print(providerService.selectedProvider);
+                      Navigator.pushNamed(context, '/Provider');
                     },
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: AppTheme.fifth,
-                            foregroundColor: AppTheme.white,
-                            child: Text(provider.razonSocial[0].toUpperCase()),
-                          ),
-                          title: Text(provider.razonSocial),
-                          trailing: Icon(
-                            Icons.chevron_right,
-                            color: AppTheme.primary,
-                            size: 30,
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: CardProvider(
+                        provider: providerService.providers[index]),
                   );
                 },
               ),
             ),
-      // floatingActionButton: ReusableWidgets.floatingActionButton(
-      //   action: () {
-      //     Navigator.pushNamed(context, '/AddEditProvider');
-      //   },
-      //   icon: Icons.add,)
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          providerService.selectedProvider = providerModel.Provider(
+              idProveedor: null,
+              razonSocial: '',
+              rfc: '',
+              direccion: '',
+              correo: '',
+              password: '',
+              apellido: '',
+              nombre: '',
+              fechaNacimiento: '',
+              telefono: '',
+              idStatus: int.parse('1'),
+              foto: ' ',
+              idUsuario: int.parse('0'));
+          Navigator.pushNamed(context, '/Provider');
+        },
+        backgroundColor: AppTheme.primary,
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class CardProvider extends StatelessWidget {
+  const CardProvider({
+    super.key,
+    required this.provider,
+  });
+
+  final providerModel.Provider provider;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: AppTheme.fifth,
+            foregroundColor: AppTheme.white,
+            child: Text(provider.razonSocial[0].toUpperCase()),
+          ),
+          title: Text(provider.razonSocial),
+          trailing: Icon(
+            Icons.chevron_right,
+            color: AppTheme.primary,
+            size: 30,
+          ),
+        ),
+      ),
     );
   }
 }

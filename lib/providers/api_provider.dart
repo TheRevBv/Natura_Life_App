@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:natura_life/providers/login_provider.dart';
 import 'package:natura_life/providers/util_provider.dart';
+import 'package:natura_life/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class APiProvider extends ChangeNotifier {
-  final String _urlBase = 'http://192.168.113.138:7092/api';
+  final String _urlBase = Constants.apiUrl;
 
   List<dynamic> products = [];
   List<dynamic> matter = [];

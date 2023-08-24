@@ -1,23 +1,23 @@
 import 'dart:convert';
 
 class Provider {
-  final int idProveedor;
-  final int idUsuario;
-  final int idStatus;
-  final String direccion;
-  final String telefono;
-  final String rfc;
-  final String razonSocial;
-  final String nombre;
-  final String apellido;
-  final String correo;
-  final String password;
-  final String fechaNacimiento;
-  final String foto;
+  int? idProveedor;
+  int? idUsuario;
+  int idStatus;
+  String direccion;
+  String telefono;
+  String rfc;
+  String razonSocial;
+  String nombre;
+  String apellido;
+  String correo;
+  String password;
+  String fechaNacimiento;
+  String? foto;
 
   Provider(
-      {required this.idProveedor,
-      required this.idUsuario,
+      {this.idProveedor,
+      this.idUsuario,
       required this.idStatus,
       required this.direccion,
       required this.telefono,
@@ -64,4 +64,19 @@ class Provider {
         'fechaNacimiento': fechaNacimiento,
         'foto': foto
       };
+
+  Provider copy() => Provider(
+      idProveedor: idProveedor,
+      idUsuario: idUsuario,
+      idStatus: idStatus,
+      direccion: direccion,
+      telefono: telefono,
+      rfc: rfc,
+      razonSocial: razonSocial,
+      nombre: nombre,
+      apellido: apellido,
+      correo: correo,
+      password: password,
+      fechaNacimiento: fechaNacimiento,
+      foto: foto);
 }

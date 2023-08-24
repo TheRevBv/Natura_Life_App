@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:natura_life/providers/dashboard_provider.dart';
-import 'package:natura_life/theme/apptheme.dart';
+// import 'package:natura_life/theme/apptheme.dart';
 import 'package:provider/provider.dart';
 
 import '../widget/reusable_widgets.dart';
@@ -32,22 +32,22 @@ class _HomeState extends State<Home> {
         index: index,
         children: screens,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          dbp.setMiddleIcon(Icons.house);
-          setState(() {
-            index = 0;
-          });
-        },
-        backgroundColor: AppTheme.secundary,
-        elevation: 2,
-        child: Icon(
-          dbp.middleIcon,
-          color: AppTheme.primary,
-          size: 40,
-        ),
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     dbp.setMiddleIcon(Icons.house);
+      //     setState(() {
+      //       index = 0;
+      //     });
+      //   },
+      //   backgroundColor: AppTheme.secundary,
+      //   elevation: 2,
+      //   child: Icon(
+      //     dbp.middleIcon,
+      //     color: AppTheme.primary,
+      //     size: 40,
+      //   ),
+      // ),
       bottomNavigationBar: BottomAppBar(
         notchMargin: 10,
         shape: const CircularNotchedRectangle(),
@@ -72,16 +72,16 @@ class _HomeState extends State<Home> {
                       index = 2;
                     });
                   }),
+              // const SizedBox(),
               const SizedBox(),
-              const SizedBox(),
-              // ReusableWidgets.bottomButton(
-              //     icon: Icons.delivery_dining,
-              //     action: () {
-              //       dbp.setMiddleIcon(Icons.delivery_dining);
-              //       setState(() {
-              //         index = 3;
-              //       });
-              //     }),
+              ReusableWidgets.bottomButton(
+                  icon: Icons.home,
+                  action: () {
+                    dbp.setMiddleIcon(Icons.home);
+                    setState(() {
+                      index = 0;
+                    });
+                  }),
               ReusableWidgets.bottomButton(
                   icon: Icons.person,
                   action: () {

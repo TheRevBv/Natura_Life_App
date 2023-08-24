@@ -7,6 +7,9 @@ import 'package:natura_life/utils/constants.dart';
 
 class ProviderService extends ChangeNotifier {
   List<Provider> providers = [];
+  late Provider selectedProvider;
+  bool isLoading = true;
+  bool isSaving = false;
   // final prefs = SharedPreferences.getInstance();
   final String _url = Constants.apiUrl;
   final Map<String, String> _headers = Constants.headers;
@@ -36,22 +39,43 @@ class ProviderService extends ChangeNotifier {
     return temp;
   }
 
+  Future<Provider> saveOrUpdateProvider(Provider provider) async {
+    isSaving = true;
+    notifyListeners();
+    print(provider.toJson());
+    if (provider.idProveedor == null || provider.idProveedor == 0) {
+      final temp = await createProvider(provider);
+      isSaving = false;
+      notifyListeners();
+      return temp;
+    } else {
+      final temp = await updateProvider(provider);
+      isSaving = false;
+      notifyListeners();
+      return temp;
+    }
+  }
+
   Future<Provider> createProvider(Provider provider) async {
-    final url = '$_url/proveedores';
+    final url = '$_url/proveedores/prov';
     final resp = await http.post(Uri.parse(url),
         headers: _headers, body: provider.toJson());
     final Map<String, dynamic> decodedData = json.decode(resp.body);
-    final temp = Provider.fromMap(decodedData);
+    // final temp = Provider.fromMap(decodedData);
+    providers.add(provider);
     notifyListeners();
-    return temp;
+    return provider;
   }
 
   Future<Provider> updateProvider(Provider provider) async {
-    final url = '$_url/proveedores/${provider.idProveedor}';
+    final url = '$_url/proveedores/prov/${provider.idProveedor}';
     final resp = await http.put(Uri.parse(url),
         headers: _headers, body: provider.toJson());
     final Map<String, dynamic> decodedData = json.decode(resp.body);
     final temp = Provider.fromMap(decodedData);
+    final index = providers
+        .indexWhere((element) => element.idProveedor == temp.idProveedor);
+    providers[index] = temp;
     notifyListeners();
     return temp;
   }

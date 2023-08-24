@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:natura_life/providers/api_provider.dart';
-import 'package:natura_life/providers/dashboard_provider.dart';
-import 'package:natura_life/providers/login_provider.dart';
+import 'package:natura_life/providers/providers.dart';
 import 'package:natura_life/routes/approutes.dart';
-import 'package:natura_life/services/providers_service.dart';
+import 'package:natura_life/services/services.dart';
 import 'package:natura_life/theme/apptheme.dart';
 import 'package:provider/provider.dart';
 

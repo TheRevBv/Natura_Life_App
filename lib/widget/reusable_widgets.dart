@@ -185,10 +185,50 @@ class ReusableWidgets {
   }
 
   static TextFormField formInput(
-      {required IconData icon, required String label, bool obscure = false}) {
+      {required IconData icon,
+      required String label,
+      bool obscure = false,
+      required void onchange(String)?,
+      String initialVal = ''}) {
     return TextFormField(
+      initialValue: initialVal,
       autocorrect: false,
       keyboardType: TextInputType.text,
+      obscureText: obscure,
+      onChanged: (value) => onchange!(value),
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(color: AppTheme.primary),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: AppTheme.primary),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(30),
+          borderSide: BorderSide(color: AppTheme.fifth),
+        ),
+        prefixIcon: Icon(
+          icon,
+          color: AppTheme.fourth,
+        ),
+      ),
+      // validator: (value) {
+      //   return (value != null && value.length >= 3) ? null : 'No valido';
+      // },
+    );
+  }
+
+  //Form input para fecha de nacimiento
+  static TextFormField formInputDate(
+      {required IconData icon,
+      required String label,
+      bool obscure = false,
+      required void onchange(String)?,
+      initialVal = ''}) {
+    return TextFormField(
+      initialValue: initialVal,
+      autocorrect: false,
+      keyboardType: TextInputType.datetime,
       obscureText: obscure,
       decoration: InputDecoration(
         labelText: label,
