@@ -1,8 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:natura_life/models/materia_prima.dart';
+import 'package:natura_life/services/services.dart';
 import 'package:natura_life/theme/apptheme.dart';
 import 'package:natura_life/theme/widget_styles.dart';
+import 'package:provider/provider.dart';
 
 class ProductTabs {
   static Widget productTab({required List prodList}) {
@@ -57,8 +60,16 @@ class ProductTabs {
   }
 
 //------------------------------------------------------------------------------
-  static Widget materialTab(
-      {required List matList, required BuildContext context}) {
+  static Widget materialTab({
+    required List<MateriaPrima> matList,
+    required BuildContext contexto,
+    // required MateriasService materiasSvc
+  }) {
+    final materiasSvc = Provider.of<MateriasService>(contexto);
+    void deleteMateria(int index, MateriasService materiasSvc) {
+      materiasSvc.deleteMateriaPrima(materiasSvc.materias[index].id!);
+    }
+
     return matList.isEmpty
         ? Center(
             child: Text(
@@ -71,44 +82,75 @@ class ProductTabs {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: ListView.builder(
-                  itemCount: matList.length,
-                  itemBuilder: (context, index) {
-                    var item = matList[index];
-                    return GestureDetector(
-                      onTap: () {
-                        print(matList[index]);
-                        Navigator.pushNamed(context, '/MateriaPrima',
-                            arguments: matList[index]);
-                      },
-                      child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                            title: Text(
-                              item['Nombre'].toUpperCase(),
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: AppTheme.fifth,
+                    itemCount: matList.length,
+                    itemBuilder: (context, index) {
+                      return Dismissible(
+                        key: UniqueKey(),
+                        background: Container(
+                          color: Colors.red,
+                          child: const Icon(Icons.delete),
+                        ),
+                        onDismissed: (direction) {
+                          deleteMateria(index, materiasSvc);
+                        },
+                        child: GestureDetector(
+                          onTap: () {
+                            // print(matList[index]);
+                            materiasSvc.selectedMateria = matList[index];
+                            Navigator.pushNamed(context, '/MateriaPrima');
+                          },
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ListTile(
+                                title: Text(
+                                  matList[index].nombre.toUpperCase(),
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppTheme.fifth,
+                                  ),
+                                ),
+                                trailing: Text(
+                                  '\$${matList[index].precio}',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppTheme.fifth,
+                                  ),
+                                ),
                               ),
                             ),
-                            trailing: Text(item['Codigo'].toUpperCase()),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    }),
               ),
               Positioned(
                 bottom: 16,
                 right: 16,
+                // child: Container(),
                 child: FloatingActionButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/AddEditMatter',
-                        arguments: {'isEdit': false});
+                    materiasSvc.selectedMateria = MateriaPrima(
+                      id: 0,
+                      codigo: '',
+                      nombre: '',
+                      descripcion: '',
+                      perecedero: 0,
+                      stock: 0,
+                      cantMinima: 0,
+                      cantMaxima: 0,
+                      idUnidadMedida: 0,
+                      precio: 0,
+                      foto: ' ',
+                      idProveedor: 0,
+                      idStatus: 1,
+                    );
+                    Navigator.pushNamed(contexto, '/MateriaPrima');
                   },
-                  child: Icon(Icons.add),
+                  backgroundColor: AppTheme.primary,
+                  child: const Icon(Icons.add),
                 ),
               ),
             ],

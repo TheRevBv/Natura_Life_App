@@ -10,9 +10,7 @@ class MateriasService extends ChangeNotifier {
   late MateriaPrima selectedMateria;
   bool isLoading = true;
   bool isSaving = false;
-  // final prefs = SharedPreferences.getInstance();
   final String _url = Constants.apiUrl;
-  // final String _url = 'http://localhost/API';
   final Map<String, String> _headers = Constants.headers;
 
   MateriasService() {
@@ -20,19 +18,20 @@ class MateriasService extends ChangeNotifier {
   }
 
   Future<List<MateriaPrima>> getMaterias() async {
-    final url = '$_url/MateriasPrimas';
+    final url = '$_url/MateriaPrimas';
     final resp = await http.get(Uri.parse(url), headers: _headers);
     final List<dynamic> decodedData = json.decode(resp.body);
-    decodedData.forEach((provider) {
-      final temp = MateriaPrima.fromMap(provider);
+    decodedData.forEach((materia) {
+      final temp = MateriaPrima.fromMap(materia);
       materias.add(temp);
     });
     notifyListeners();
+    print(materias);
     return materias;
   }
 
   Future<MateriaPrima> getMateriasById(int id) async {
-    final url = '$_url/MateriasPrimas/$id';
+    final url = '$_url/MateriaPrimas/$id';
     final resp = await http.get(Uri.parse(url), headers: _headers);
     final Map<String, dynamic> decodedData = json.decode(resp.body);
     final temp = MateriaPrima.fromMap(decodedData);
@@ -40,52 +39,55 @@ class MateriasService extends ChangeNotifier {
     return temp;
   }
 
-  Future<MateriaPrima> saveOrUpdateMaterias(MateriaPrima provider) async {
+  Future<MateriaPrima> saveOrUpdateMaterias(MateriaPrima materia) async {
     isSaving = true;
     notifyListeners();
-    // print(provider.toJson());
-    // ignore: unnecessary_null_comparison
-    if (provider.idProveedor == null || provider.idProveedor == 0) {
-      final temp = await createProvider(provider);
+    if (materia.id == null || materia.id == 0) {
+      final temp = await createMateriaPrima(materia);
       isSaving = false;
       notifyListeners();
       return temp;
     } else {
-      final temp = await updateProvider(provider);
+      final temp = await updateMateriaPrima(materia);
       isSaving = false;
       notifyListeners();
       return temp;
     }
   }
 
-  Future<MateriaPrima> createProvider(MateriaPrima provider) async {
-    final url = '$_url/MateriasPrimas/';
+  Future<MateriaPrima> createMateriaPrima(MateriaPrima materia) async {
+    final url = '$_url/MateriaPrimas/';
     final resp = await http.post(Uri.parse(url),
-        headers: _headers, body: provider.toJson());
-    final Map<String, dynamic> decodedData = json.decode(resp.body);
-    // final temp = Provider.fromMap(decodedData);
-    materias.add(provider);
-    notifyListeners();
-    return provider;
-  }
-
-  Future<MateriaPrima> updateProvider(MateriaPrima provider) async {
-    final url = '$_url/MateriasPrimas/${provider.idProveedor}';
-    final resp = await http.put(Uri.parse(url),
-        headers: _headers, body: provider.toJson());
+        headers: _headers, body: materia.toJson());
     final Map<String, dynamic> decodedData = json.decode(resp.body);
     final temp = MateriaPrima.fromMap(decodedData);
-    final index = materias
-        .indexWhere((element) => element.idProveedor == temp.idProveedor);
+    materias.add(temp);
+    notifyListeners();
+    return materia;
+  }
+
+  Future<MateriaPrima> updateMateriaPrima(MateriaPrima materia) async {
+    final url = '$_url/MateriaPrimas/${materia.id}';
+    final resp = await http.put(Uri.parse(url),
+        headers: _headers, body: materia.toJson());
+    final Map<String, dynamic> decodedData = json.decode(resp.body);
+    final temp = MateriaPrima.fromMap(decodedData);
+    final index = materias.indexWhere((element) => element.id == temp.id);
     materias[index] = temp;
     notifyListeners();
     return temp;
   }
 
-  Future<int> deleteProvider(int id) async {
-    final url = '$_url/MateriasPrimas/$id';
+  Future<int> deleteMateriaPrima(int id) async {
+    final url = '$_url/MateriaPrimas/$id';
     final resp = await http.delete(Uri.parse(url), headers: _headers);
     notifyListeners();
-    return json.decode(resp.body);
+    if (resp.statusCode == 204) {
+      materias.removeWhere((element) => element.id == id);
+      notifyListeners();
+      return 1;
+    } else {
+      return 0;
+    }
   }
 }

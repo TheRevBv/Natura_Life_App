@@ -46,7 +46,7 @@ class _UserState extends State<User> {
                         padding: const EdgeInsets.all(15.0),
                         child: Image.asset(
                             fit: BoxFit.fitHeight,
-                            'assets/images/logo_natural_life.png'),
+                            'assets/images/clamaroj/logo inicio.png'),
                       ),
                     ),
                   ),

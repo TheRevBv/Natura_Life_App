@@ -32,7 +32,6 @@ class ProviderScreen extends StatelessWidget {
 
 class _ProviderScreenBody extends StatelessWidget {
   const _ProviderScreenBody({
-    super.key,
     required this.screenWidth,
     required this.title,
     required this.providerSvc,

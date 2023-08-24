@@ -14,7 +14,8 @@ class APiProvider extends ChangeNotifier {
   List<dynamic> provider = [];
 
   APiProvider() {
-    getMatter();
+    getProducts();
+    // getMatter();
   }
 
   Future login({required LoginFormProvider lfp}) async {
@@ -53,17 +54,17 @@ class APiProvider extends ChangeNotifier {
     }
   }
 
-  Future getMatter() async {
-    final String url = '$_urlBase/MateriaPrimas';
-    // const String url = 'http://localhost/api/MateriasPrimas.php';
-    final response = await UtilProvider.rtp.apiRest(urlBase: url);
-    // final response = await UtilProvider.rtp.responseHTTP(urlBase: url);
-    if (response.statusCode == 200) {
-      var jResponse = jsonDecode(response.body) as List<dynamic>;
-      matter = jResponse;
-      notifyListeners();
-    }
-  }
+  // Future getMatter() async {
+  //   final String url = '$_urlBase/MateriaPrimas';
+  //   // const String url = 'http://localhost/api/MateriasPrimas.php';
+  //   final response = await UtilProvider.rtp.apiRest(urlBase: url);
+  //   // final response = await UtilProvider.rtp.responseHTTP(urlBase: url);
+  //   if (response.statusCode == 200) {
+  //     var jResponse = jsonDecode(response.body) as List<dynamic>;
+  //     matter = jResponse;
+  //     notifyListeners();
+  //   }
+  // }
 
   // Future getProviders() async {
   //   final String url = '$_urlBase/Proveedores';

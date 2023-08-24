@@ -17,7 +17,7 @@ class Login extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/fondo_1.png'),
+              image: AssetImage('assets/images/clamaroj/LOGO CLAMAROJ.jpg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -114,7 +114,7 @@ class TransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
         // Imagen en el centro de la AppBar
         Center(
           child: Image.asset(
-            'assets/images/logo_natural_life.png', // Ruta de tu imagen (debe estar en la carpeta 'assets')
+            'assets/images/clamaroj/logo inicio.png',
             width: 250.0,
             height: 250.0,
           ),

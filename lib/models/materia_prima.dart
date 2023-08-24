@@ -1,24 +1,24 @@
 import 'dart:convert';
 
 class MateriaPrima {
-  final int idMateriaPrima;
-  final String codigo;
-  final String nombre;
-  final String descripcion;
-  final int perecedero;
-  final int stock;
-  final int cantMinima;
-  final int cantMaxima;
-  final int idUnidadMedida;
-  final double precio;
-  final String foto;
-  final int idProveedor;
-  final int idStatus;
-  final String fechaRegistro;
-  final String fechaModificacion;
+  int? id;
+  String codigo;
+  String nombre;
+  String descripcion;
+  int perecedero;
+  int stock;
+  int cantMinima;
+  int cantMaxima;
+  int idUnidadMedida;
+  double precio;
+  String? foto;
+  int idProveedor;
+  int idStatus;
+  String? fechaRegistro;
+  String? fechaModificacion;
 
   MateriaPrima({
-    required this.idMateriaPrima,
+    this.id,
     required this.codigo,
     required this.nombre,
     required this.descripcion,
@@ -31,8 +31,8 @@ class MateriaPrima {
     required this.foto,
     required this.idProveedor,
     required this.idStatus,
-    required this.fechaRegistro,
-    required this.fechaModificacion,
+    this.fechaRegistro,
+    this.fechaModificacion,
   });
 
   factory MateriaPrima.fromJson(String str) =>
@@ -41,43 +41,43 @@ class MateriaPrima {
   String toJson() => json.encode(toMap());
 
   factory MateriaPrima.fromMap(Map<String, dynamic> json) => MateriaPrima(
-        idMateriaPrima: json['IdMateriaPrima'],
-        codigo: json['Codigo'],
-        nombre: json['Nombre'],
-        descripcion: json['Descripcion'],
-        perecedero: json['Perecedero'],
-        stock: json['Stock'],
-        cantMinima: json['CantMinima'],
-        cantMaxima: json['CantMaxima'],
-        idUnidadMedida: json['IdUnidadMedida'],
-        precio: double.parse(json['Precio']),
-        foto: json['Foto'],
-        idProveedor: json['IdProveedor'],
-        idStatus: json['IdStatus'],
-        fechaRegistro: json['FechaRegistro'],
-        fechaModificacion: json['FechaModificacion'],
+        id: json['id'],
+        codigo: json['codigo'],
+        nombre: json['nombre'],
+        descripcion: json['descripcion'],
+        perecedero: json['perecedero'],
+        stock: json['stock'],
+        cantMinima: json['cantMinima'],
+        cantMaxima: json['cantMaxima'],
+        idUnidadMedida: json['idUnidadMedida'],
+        precio: json['precio'],
+        foto: json['foto'],
+        idProveedor: json['idProveedor'],
+        idStatus: json['idStatus'],
+        fechaRegistro: json['fechaRegistro'],
+        fechaModificacion: json['fechaModificacion'],
       );
 
   Map<String, dynamic> toMap() => {
-        'IdMateriaPrima': idMateriaPrima,
-        'Codigo': codigo,
-        'Nombre': nombre,
-        'Descripcion': descripcion,
-        'Perecedero': perecedero,
-        'Stock': stock,
-        'CantMinima': cantMinima,
-        'CantMaxima': cantMaxima,
-        'IdUnidadMedida': idUnidadMedida,
-        'Precio': precio.toString(),
-        'Foto': foto,
-        'IdProveedor': idProveedor,
-        'IdStatus': idStatus,
-        'FechaRegistro': fechaRegistro,
-        'FechaModificacion': fechaModificacion,
+        'id': id,
+        'codigo': codigo,
+        'nombre': nombre,
+        'descripcion': descripcion,
+        'perecedero': perecedero,
+        'stock': stock,
+        'cantMinima': cantMinima,
+        'cantMaxima': cantMaxima,
+        'idUnidadMedida': idUnidadMedida,
+        'precio': precio,
+        'foto': foto,
+        'idProveedor': idProveedor,
+        'idStatus': idStatus,
+        'fechaRegistro': fechaRegistro,
+        'fechaModificacion': fechaModificacion,
       };
 
   MateriaPrima copy() => MateriaPrima(
-        idMateriaPrima: idMateriaPrima,
+        id: id,
         codigo: codigo,
         nombre: nombre,
         descripcion: descripcion,

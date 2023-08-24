@@ -42,7 +42,7 @@ class ProviderService extends ChangeNotifier {
   Future<Provider> saveOrUpdateProvider(Provider provider) async {
     isSaving = true;
     notifyListeners();
-    print(provider.toJson());
+    // print(provider.toJson());
     if (provider.idProveedor == null || provider.idProveedor == 0) {
       final temp = await createProvider(provider);
       isSaving = false;

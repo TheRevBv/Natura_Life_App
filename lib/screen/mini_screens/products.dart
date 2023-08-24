@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:natura_life/providers/api_provider.dart';
+// import 'package:natura_life/models/materia_prima.dart';
+import 'package:natura_life/providers/providers.dart';
 import 'package:natura_life/screen/mini_screens/tabs/products.dart';
+import 'package:natura_life/services/materias_service.dart';
 import 'package:natura_life/theme/apptheme.dart';
 import 'package:natura_life/theme/widget_styles.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +24,7 @@ class _ProductsState extends State<Products> {
   @override
   Widget build(BuildContext context) {
     final prodProvider = Provider.of<APiProvider>(context);
+    final materiaSvc = Provider.of<MateriasService>(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -43,7 +46,7 @@ class _ProductsState extends State<Products> {
           children: [
             ProductTabs.productTab(prodList: prodProvider.products),
             ProductTabs.materialTab(
-                matList: prodProvider.matter, context: context),
+                matList: materiaSvc.materias, contexto: context),
           ],
         ),
       ),

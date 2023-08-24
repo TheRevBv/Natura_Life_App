@@ -1,22 +1,20 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:natura_life/models/materia_prima.dart';
-import 'package:natura_life/providers/util_provider.dart';
-import 'package:http/http.dart' as http;
 
-class MateriasPrimasProvider extends ChangeNotifier {
-  final String _urlBase = 'http://192.168.100.158:7092/api';
-  // final String _urlBase = 'http://localhost/api';
+class MateriaFormProvider extends ChangeNotifier {
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
-  List<dynamic> materiasPrimas = [];
-  var materiaPrima = {};
+  MateriaPrima materiaPrima;
 
-  MateriasPrimasProvider() {
-    getMateriasPrimas();
+  MateriaFormProvider(this.materiaPrima);
+
+  bool isValidForm() {
+    print(materiaPrima.toJson());
+    return formkey.currentState?.validate() ?? false;
   }
-
-  Future getMateriasPrimas() async {
+}
+/*
+Future getMateriasPrimas() async {
     final String url = '$_urlBase/MateriasPrimas';
     // final String url = '$_urlBase/MateriasPrimas.php';
     final response = await UtilProvider.rtp.responseHTTP(urlBase: url);
@@ -77,4 +75,4 @@ class MateriasPrimasProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-}
+*/

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:natura_life/models/proveedor.dart' as providerModel;
+import 'package:natura_life/models/proveedor.dart' as provider_model;
 // import 'package:natura_life/providers/api_provider.dart';
 import 'package:natura_life/services/services.dart';
 import 'package:natura_life/theme/apptheme.dart';
@@ -52,8 +52,8 @@ class _ProvidersState extends State<Providers> {
                     background: Container(
                       color: Colors.red,
                       alignment: Alignment.centerRight,
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Icon(Icons.delete, color: Colors.white),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: const Icon(Icons.delete, color: Colors.white),
                     ),
                     onDismissed: (direction) {
                       _deleteProvider(index, providerService);
@@ -72,7 +72,7 @@ class _ProvidersState extends State<Providers> {
               )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          providerService.selectedProvider = providerModel.Provider(
+          providerService.selectedProvider = provider_model.Provider(
               idProveedor: int.parse('0'),
               razonSocial: '',
               rfc: '',
@@ -101,7 +101,7 @@ class CardProvider extends StatelessWidget {
     required this.provider,
   });
 
-  final providerModel.Provider provider;
+  final provider_model.Provider provider;
 
   @override
   Widget build(BuildContext context) {

@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => LoginFormProvider()),
         ChangeNotifierProvider(create: (_) => DashboardProvider()),
         ChangeNotifierProvider(create: (_) => ProviderService(), lazy: true),
+        ChangeNotifierProvider(create: (_) => MateriasService(), lazy: true),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
