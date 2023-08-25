@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:natura_life/theme/apptheme.dart';
 
 class WidgetTheme {
-  static TextStyle loginTitle =
-      const TextStyle(fontFamily: 'OleoScript', fontSize: 45);
+  static TextStyle loginTitle = TextStyle(
+      fontFamily: 'OleoScript', fontSize: 45, color: AppTheme.primary);
 
   static TextStyle tabTitle = const TextStyle(fontSize: 20);
   static TextStyle appbarTitle =

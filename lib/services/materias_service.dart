@@ -26,7 +26,7 @@ class MateriasService extends ChangeNotifier {
       materias.add(temp);
     });
     notifyListeners();
-    print(materias);
+    // print(materias);
     return materias;
   }
 

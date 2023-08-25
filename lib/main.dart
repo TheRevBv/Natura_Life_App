@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Natura Life',
+          title: 'Clamaroj',
           theme: AppTheme.lightTheme,
           initialRoute: AppRoutes.initialROute,
           routes: AppRoutes.routes,

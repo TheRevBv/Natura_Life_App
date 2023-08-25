@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:natura_life/providers/api_provider.dart';
-import 'package:natura_life/providers/login_provider.dart';
+import 'package:natura_life/providers/providers.dart';
 import 'package:natura_life/theme/widget_styles.dart';
 import 'package:natura_life/widget/reusable_widgets.dart';
 import 'package:provider/provider.dart';

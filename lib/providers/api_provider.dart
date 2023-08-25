@@ -10,8 +10,6 @@ class APiProvider extends ChangeNotifier {
   final String _urlBase = Constants.apiUrl;
 
   List<dynamic> products = [];
-  List<dynamic> matter = [];
-  List<dynamic> provider = [];
 
   APiProvider() {
     getProducts();
@@ -31,12 +29,6 @@ class APiProvider extends ChangeNotifier {
       prefs.setString('RolUsuario', rol[0]['nombre']);
       prefs.setString('NombreUsuario', usuario['nombre']);
       prefs.setString('ApellidosUsuario', usuario['apellido']);
-      // prefs.setString('CorreoUsuario', jResponse['correo']);
-      // prefs.setString('RolUsuario', jResponse['nombreRol']);
-      // prefs.setString('NombreUsuario', jResponse['nombre']);
-      // prefs.setString('ApellidosUsuario', jResponse['apellidos']);
-      // prefs.setString('TelefonoUsuario', jResponse['telefono']);
-      // prefs.setString('DireccionUsuario', jResponse['direccion']);
       prefs.setString('Token', jResponse['token']);
       return 'OK';
     }
@@ -53,28 +45,6 @@ class APiProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
-  // Future getMatter() async {
-  //   final String url = '$_urlBase/MateriaPrimas';
-  //   // const String url = 'http://localhost/api/MateriasPrimas.php';
-  //   final response = await UtilProvider.rtp.apiRest(urlBase: url);
-  //   // final response = await UtilProvider.rtp.responseHTTP(urlBase: url);
-  //   if (response.statusCode == 200) {
-  //     var jResponse = jsonDecode(response.body) as List<dynamic>;
-  //     matter = jResponse;
-  //     notifyListeners();
-  //   }
-  // }
-
-  // Future getProviders() async {
-  //   final String url = '$_urlBase/Proveedores';
-  //   final response = await UtilProvider.rtp.responseHTTP(urlBase: url);
-  //   if (response.statusCode == 200) {
-  //     var jResponse = jsonDecode(response.body) as List<dynamic>;
-  //     provider = jResponse;
-  //     notifyListeners();
-  //   }
-  // }
 
   Future deleteProduct(int id) async {
     final String url = '$_urlBase/Productos/$id';
