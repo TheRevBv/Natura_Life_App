@@ -20,8 +20,9 @@ class ProductosTab extends StatelessWidget {
               itemCount: prodList.length,
               itemBuilder: (context, index) {
                 var producto = prodList[index];
-                var image = producto['foto'] == null
-                    ? base64Decode(producto['foto'])
+                var image = producto['foto'] != null &&
+                        producto['foto'].contains('data:image')
+                    ? base64Decode(producto['foto'].substring(23))
                     : null;
                 return GestureDetector(
                   onTap: () {
@@ -45,10 +46,12 @@ class ProductosTab extends StatelessWidget {
                         ],
                       ),
                       trailing: CircleAvatar(
-                        backgroundColor: AppTheme.fourth,
-                        foregroundColor: Colors.white,
-                        child: Text('${producto['precio']}'),
-                      ),
+                          backgroundColor: AppTheme.fourth,
+                          foregroundColor: Colors.white,
+                          child: Text(
+                            '${producto['precio']}',
+                            style: const TextStyle(fontSize: 12),
+                          )),
                     ),
                   ),
                 );

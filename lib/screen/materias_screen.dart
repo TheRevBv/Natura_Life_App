@@ -94,6 +94,7 @@ class _MateriaScreenBody extends StatelessWidget {
       )),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
+        heroTag: 'btnSaveMateria',
         onPressed: () {
           if (!materiaForm.isValidForm()) return;
           materiaSvc.saveOrUpdateMaterias(materiaForm.materiaPrima);
@@ -158,7 +159,7 @@ class FormMateriaPrima extends StatelessWidget {
           ReusableWidgets.formInput(
             icon: Icons.inventory,
             label: 'Total en Stock',
-            initialVal: '${materia.stock}',
+            initialVal: materia.stock.toString(),
             onchange: (value) => materia.stock = int.parse(value),
           ),
           const SizedBox(height: 20),
@@ -166,48 +167,51 @@ class FormMateriaPrima extends StatelessWidget {
             icon: Icons.expand_less,
             label: 'Cantidad Mínima',
             initialVal: '${materia.cantMaxima}',
-            onchange: (value) => materia.cantMaxima = int.parse(value),
+            onchange: (value) => materia.cantMaxima =
+                int.tryParse(value.replaceAll('\$', '')) ?? 0,
           ),
           const SizedBox(height: 20),
           ReusableWidgets.formInput(
             icon: Icons.expand_more,
             label: 'Cantidad Máxima',
             initialVal: '${materia.cantMinima}',
-            onchange: (value) => materia.cantMinima = int.parse(value),
+            onchange: (value) => materia.cantMinima =
+                int.tryParse(value.replaceAll('\$', '')) ?? 0,
           ),
           const SizedBox(height: 20),
           ReusableWidgets.formInput(
             icon: Icons.attach_money,
             label: 'Precio en MXN',
             initialVal: '${materia.precio}',
-            onchange: (value) => materia.precio = double.parse(value),
+            onchange: (value) => materia.precio =
+                double.tryParse(value.replaceAll('\$', '')) ?? 0,
           ),
           const SizedBox(height: 20),
           ReusableWidgets.formInput(
             icon: Icons.person,
             label: 'Proveedor',
-            initialVal: '${materia.idProveedor}',
+            initialVal: materia.idProveedor.toString(),
             onchange: (value) => materia.idProveedor = int.parse(value),
           ),
           const SizedBox(height: 20),
           ReusableWidgets.formInput(
             icon: Icons.person,
             label: 'Unidad de Medida',
-            initialVal: '${materia.idUnidadMedida}',
+            initialVal: materia.idUnidadMedida.toString(),
             onchange: (value) => materia.idUnidadMedida = int.parse(value),
           ),
           const SizedBox(height: 20),
           ReusableWidgets.formInput(
             icon: Icons.person,
             label: 'Estatus',
-            initialVal: '${materia.idStatus}',
+            initialVal: materia.idStatus.toString(),
             onchange: (value) => materia.idStatus = int.parse(value),
           ),
           const SizedBox(height: 20),
           ReusableWidgets.formInput(
             icon: Icons.person,
             label: 'Perecedero',
-            initialVal: '${materia.perecedero}',
+            initialVal: materia.perecedero.toString(),
             onchange: (value) => materia.perecedero = int.parse(value),
           ),
           const SizedBox(height: 20),

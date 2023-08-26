@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:natura_life/models/materia_prima.dart';
 import 'package:natura_life/services/services.dart';
 import 'package:natura_life/theme/apptheme.dart';
 import 'package:provider/provider.dart';
@@ -11,44 +12,53 @@ class MateriasTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final materiasSvc = Provider.of<MateriasService>(context);
-    final materias = materiasSvc.materias;
-    return materias.isEmpty
+    return materiasSvc.materias.isEmpty
         ? const Center(child: Text('No hay materias'))
         : Padding(
             padding: const EdgeInsets.all(10.0),
             child: ListView.builder(
-              itemCount: materias.length,
+              itemCount: materiasSvc.materias.length,
               itemBuilder: (context, index) {
-                var materia = materias[index];
                 return GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, '/Materia',
-                        arguments: materias[index]);
+                    materiasSvc.selectedMateria = materiasSvc.materias[index];
+                    Navigator.pushNamed(context, '/MateriaPrima');
                   },
-                  child: Card(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: AppTheme.fifth,
-                        foregroundColor: AppTheme.white,
-                        child: Text(materia.nombre[0].toUpperCase()),
-                      ),
-                      title: Text(materia.nombre),
-                      subtitle: Column(
-                        children: [
-                          Text(materia.descripcion),
-                          Text('\$${materia.precio}')
-                        ],
-                      ),
-                      trailing: CircleAvatar(
-                        backgroundColor: AppTheme.fourth,
-                        foregroundColor: Colors.white,
-                        child: Text('${materia.precio}'),
-                      ),
-                    ),
-                  ),
+                  child: CardMateria(materia: materiasSvc.materias[index]),
                 );
               },
             ),
           );
+  }
+}
+
+class CardMateria extends StatelessWidget {
+  const CardMateria({
+    super.key,
+    required this.materia,
+  });
+
+  final MateriaPrima materia;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: AppTheme.fifth,
+          foregroundColor: AppTheme.white,
+          child: Text(materia.nombre[0].toUpperCase()),
+        ),
+        title: Text(materia.nombre.toUpperCase()),
+        subtitle: Column(
+          children: [Text(materia.descripcion), Text('\$${materia.precio}')],
+        ),
+        trailing: CircleAvatar(
+          backgroundColor: AppTheme.fourth,
+          foregroundColor: Colors.white,
+          child: Text('${materia.stock}'),
+        ),
+      ),
+    );
   }
 }
